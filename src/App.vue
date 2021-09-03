@@ -1,6 +1,7 @@
 <template>
   <div>
     黑马头条
+    <i class=" toutiao toutiao-shouji"></i>
   </div>
 </template>
 
