@@ -81,6 +81,7 @@ export default {
         const { data: res } = await login(this.form)
         this.$store.commit('setUser', res.data)
         this.$toast.success('登录成功')
+        this.$router.push('/profile')
       } catch (err) {
         if (err.response && err.response.status === 400) {
           return this.$toast.fail('验证码错误或者重新登录')

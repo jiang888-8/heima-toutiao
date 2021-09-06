@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { getItem, setItem } from '@/utils/storage.js'
 
 Vue.use(Vuex)
 
@@ -7,12 +8,12 @@ const hmttToken = 'HMTT-TOKEN'
 
 export default new Vuex.Store({
   state: {
-    user: JSON.parse(localStorage.getItem(hmttToken))
+    user: getItem(hmttToken)
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
-      localStorage.setItem(hmttToken, JSON.stringify(payload))
+      setItem(hmttToken, payload)
     }
   },
   actions: {
