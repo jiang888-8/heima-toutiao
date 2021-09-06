@@ -4,29 +4,29 @@
 
     <!-- 底部标签栏n -->
     <!--路由占位  -->
-    <van-tabbar rotue>
-      <van-tabbar-item to="/home" icon="home-o">
+    <van-tabbar route>
+      <van-tabbar-item to='/home' icon="home-o">
         <!-- 默认插槽 -->
         <span>首页</span>
         <template #icon>
           <i class="toutiao toutiao-shouye"></i>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item to="/video" icon="search">
+      <van-tabbar-item to='/video' icon="search">
         <!-- 默认插槽 -->
         <span>视频</span>
         <template #icon>
           <i class="toutiao toutiao-shipin"></i>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item to="/qa" icon="friends-o">
+      <van-tabbar-item to='/qa' icon="friends-o">
         <!-- 默认插槽 -->
         <span>问答</span>
         <template #icon>
           <i class="toutiao toutiao-wenda"></i>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item to="/profile" icon="setting-o">
+      <van-tabbar-item to='/profile' icon="setting-o">
         <!-- 默认插槽 -->
         <span>我的</span>
         <template #icon>
