@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './vant/index.js'
-import 'amfe-flexible'
 import './styles/index.less'
+import 'amfe-flexible'
 
 Vue.config.productionTip = false
 

@@ -4,7 +4,11 @@
     <van-nav-bar
       title="登录"
       class="page-nav-bar"
-    />
+    >
+      <template #left>
+        <van-icon @click="$router.back()" color="#fff" name="cross" />
+      </template>
+    </van-nav-bar>
 
     <van-form ref="from" @submit="onSubmit">
       <van-field
@@ -78,8 +82,8 @@ export default {
     // 提交表单
     async onSubmit () {
       try {
-        const { data: res } = await login(this.form)
-        this.$store.commit('setUser', res.data)
+        const res = await login(this.form)
+        this.$store.commit('setUser', res)
         this.$toast.success('登录成功')
         this.$router.push('/profile')
       } catch (err) {

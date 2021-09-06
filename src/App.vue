@@ -23,12 +23,5 @@ export default {
 </script>
 
 <style scoped>
-.rem {
-  width: 1rem;
-  height: 1rem;
-  background-color: red;
-}
-* {
-  font-size: 24px;
-}
+
 </style>
