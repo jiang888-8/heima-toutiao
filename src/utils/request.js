@@ -3,7 +3,8 @@ import { Toast } from 'vant'
 import store from '@/store'
 
 const request = axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn/'
+  // baseURL: 'http://ttapi.research.itcast.cn/'
+  baseURL: 'http://toutiao-app.itheima.net'
 })
 
 // 请求拦截器
@@ -13,11 +14,14 @@ request.interceptors.request.use(config => {
     // 配置请求头
     config.headers.Authorization = 'Bearer ' + store.state.user.token
   }
-  Toast.loading({
-    message: '加载中...',
-    duration: 0, // 展示时长(ms)，值为 0 时，toast 不会消失
-    forbidClick: true
-  })
+  if (config.url !== '/v1_1/articles') {
+    Toast.loading({
+      message: '加载中...',
+      duration: 0, // 展示时长(ms)，值为 0 时，toast 不会消失
+      forbidClick: true
+    })
+  }
+
   return config
 })
 
