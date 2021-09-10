@@ -10,15 +10,7 @@
           error-text="请求失败，点击重新加载"
           @load="onLoad"
         >
-          <van-cell v-for="item in list" :key="item.art_id" :title="item.title" value="内容" size="large" >
-            <template #label>
-              <div class="label-box">
-                <span>作者</span>
-                <span>作者</span>
-                <span>作者</span>
-              </div>
-            </template>
-          </van-cell>
+          <article-item v-for="item in list" :key="item.art_id" :articleItem='item'></article-item>
         </van-list>
     </van-pull-refresh>
 
@@ -28,6 +20,7 @@
 <script>
 import { getArticleList } from '@/api/article.js'
 import { Toast } from 'vant'
+import ArticleItem from '@/components/ArticleItem.vue'
 export default {
   data () {
     return {
@@ -39,6 +32,10 @@ export default {
       isPullLoading: false,
       pullRefreshText: ''
     }
+  },
+
+  components: {
+    ArticleItem
   },
 
   props: {
@@ -105,11 +102,7 @@ export default {
 
 <style scoped lang='less'>
 .articleList {
-  padding-bottom: 100px;
-}
-.label-box {
-  span:nth-child(2) {
-    margin: 0 8px;
-  }
+  height: 80vh;
+  overflow: scroll;
 }
 </style>

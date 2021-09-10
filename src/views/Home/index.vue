@@ -16,12 +16,19 @@
         <ArticleList :channelId='item.id' />
       </van-tab>
       <template #nav-right>
-        <div class="right-btn">
+        <div class="right-btn" @click="showPopup">
           <i class="toutiao toutiao-gengduo"></i>
         </div>
         <div class="placeholder-box"></div>
       </template>
     </van-tabs>
+    <van-popup
+    v-model="show"
+    position="bottom"
+    closeable close-icon-position="top-left"
+    :style="{ height: '80%' }">
+    <ChannelEditPopup @update-active='onUpdateActive' :myChannels='channels' :activeIndex='active'/>
+    </van-popup>
   </div>
 </template>
 
@@ -29,16 +36,20 @@
 import { getUserChannels } from '@/api/user.js'
 import ArticleList from './components/ArticleList.vue'
 import { Toast } from 'vant'
+import ChannelEditPopup from './components/ChannelEditPopup.vue'
+import { getItem } from '@/utils/storage.js'
 export default {
   data () {
     return {
       active: 0,
-      channels: []
+      channels: [],
+      show: false
     }
   },
 
   components: {
-    ArticleList
+    ArticleList,
+    ChannelEditPopup
   },
 
   created () {
@@ -48,11 +59,27 @@ export default {
   methods: {
     async loadUserChannels () {
       try {
-        const res = await getUserChannels()
-        this.channels = res.channels
+        // 未登录，用本地数据
+        const localChannel = getItem('HMTT-CHANNELS')
+        if (!this.$store.state.user && localChannel) {
+          this.channels = localChannel
+        } else {
+          // 登录了，发请求
+          const res = await getUserChannels()
+          this.channels = res.channels
+        }
       } catch (err) {
         Toast('系统异常')
       }
+    },
+
+    showPopup () {
+      this.show = true
+    },
+
+    onUpdateActive (val, flag) {
+      this.active = val
+      this.show = flag
     }
   }
 }
@@ -78,6 +105,7 @@ export default {
 
   /deep/.header-tabs {
     .van-tabs__wrap {
+      width: 100%;
       height: 80px;
       border-right: 1px solid #EDEFF3;
       position: fixed;

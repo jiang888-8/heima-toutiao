@@ -10,10 +10,11 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(config => {
   // console.log(config)
-  if (config.url.indexOf('/user') !== -1) {
+  if (store.state.user) {
     // 配置请求头
     config.headers.Authorization = 'Bearer ' + store.state.user.token
   }
+  // if (config.url !== '/app/v1_1/articles') {
   if (config.url !== '/v1_1/articles') {
     Toast.loading({
       message: '加载中...',

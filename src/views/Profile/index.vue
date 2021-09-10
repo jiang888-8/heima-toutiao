@@ -16,7 +16,7 @@
             fit='cover'
             :src="users.photo"
           />
-          <span class="name">吴亦凡</span>
+          <span class="name">{{users.name}}</span>
         </div>
         <div>
           <van-button type="default">编辑资料</van-button>

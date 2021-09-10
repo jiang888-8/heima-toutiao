@@ -8,6 +8,7 @@ import request from '@/utils/request.js'
 export const sendCode = (mobile) => {
   return request({
     url: '/v1_0/sms/codes/' + mobile
+    // url: '/app/v1_0/sms/codes/' + mobile
   })
 }
 
@@ -19,6 +20,7 @@ export const sendCode = (mobile) => {
 export const login = (data) => {
   return request({
     url: '/v1_0/authorizations',
+    // url: '/app/v1_0/authorizations',
     method: 'POST',
     data
   })
@@ -31,6 +33,7 @@ export const login = (data) => {
 export const getUserInfo = () => {
   return request({
     url: '/v1_0/user',
+    // url: '/app/v1_0/user',
     method: 'GET'
   })
 }
@@ -42,6 +45,7 @@ export const getUserInfo = () => {
 export const getUserChannels = () => {
   return request({
     url: '/v1_0/user/channels',
+    // url: '/app/v1_0/user/channels',
     method: 'GET'
   })
 }
