@@ -21,12 +21,10 @@ export const getSearchSuggestion = (q) => {
  * @param {*} q 搜索关键字
  * @returns promise
  */
-export const getSearchResults = (q) => {
+export const getSearchResults = (params) => {
   return request({
     url: '/v1_0/search',
     method: 'GET',
-    params: {
-      q
-    }
+    params
   })
 }
