@@ -2,22 +2,17 @@
   <div class="search-history-container">
     <van-cell title="搜索历史">
       <template>
-        <div class="right">
-          <span>全部删除</span>
-          <span>完成</span>
+        <div class="right" v-if="isDel">
+          <span @click="history.splice(0)">全部删除</span>
+          <span @click="isDel = false">完成</span>
         </div>
-        <van-icon name="delete-o" />
+        <van-icon @click="isDel = true" name="delete-o" v-else />
       </template>
     </van-cell>
 
-    <van-cell title="黑马">
+    <van-cell @click="onClickHistoryItem(index)" v-for="(item,index) in history" :key="item" :title="item">
       <template>
-        <van-icon name="close" />
-      </template>
-    </van-cell>
-    <van-cell title="黑马">
-      <template>
-        <van-icon name="close" />
+        <van-icon name="close" v-if="isDel" />
       </template>
     </van-cell>
   </div>
@@ -27,7 +22,14 @@
 export default {
   data () {
     return {
+      isDel: false
+    }
+  },
 
+  props: {
+    history: {
+      type: Array,
+      required: true
     }
   },
 
@@ -36,7 +38,13 @@ export default {
   },
 
   methods: {
-
+    onClickHistoryItem (index) {
+      if (this.isDel) {
+        this.history.splice(index, 1)
+      } else {
+        this.$emit('search', this.history[index])
+      }
+    }
   }
 }
 </script>

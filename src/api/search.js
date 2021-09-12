@@ -17,8 +17,8 @@ export const getSearchSuggestion = (q) => {
 }
 
 /**
- *
- * @param {*} q 搜索关键字
+ * 搜索结果
+ * @param {*} params {page,per_page,q}
  * @returns promise
  */
 export const getSearchResults = (params) => {
