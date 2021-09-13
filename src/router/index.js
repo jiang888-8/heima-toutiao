@@ -7,13 +7,14 @@ import Video from '@/views/Video'
 import Qa from '@/views/Qa'
 import Profile from '@/views/Profile'
 import Search from '@/views/Search'
+import Article from '@/views/Article'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/layout'
   },
   {
     path: '/login',
@@ -46,6 +47,11 @@ const routes = [
   {
     path: '/search',
     component: Search
+  },
+  {
+    path: '/article/:ArticleId',
+    component: Article,
+    props: true // 开启props传参
   }
 ]
 
