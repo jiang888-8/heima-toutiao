@@ -65,3 +65,46 @@ export const getComment = (params) => {
     params
   })
 }
+
+/**
+ * 对文章点赞
+ * @param {*} target target(id)
+ * @returns promise
+ */
+export const getLikes = (target) => {
+  return request({
+    url: '/v1_0/article/likings',
+    method: 'POST',
+    data: {
+      target
+    }
+  })
+}
+
+/**
+ * 取消对文章的点赞
+ * @param {*} target id
+ * @returns promise
+ */
+export const removeLikes = (target) => {
+  return request({
+    url: '/v1_0/article/likings/' + target,
+    method: 'DELETE'
+  })
+}
+
+/**
+ * 添加评论或评论回复
+ * @param {*} data {target,content,art_id}
+ * target 文章id或者评论id
+ * content 评论内容
+ * art_id 文章id（给评论评论时需要传）
+ * @returns promise
+ */
+export const postComments = (data) => {
+  return request({
+    url: '/v1_0/comments',
+    method: 'POST',
+    data
+  })
+}

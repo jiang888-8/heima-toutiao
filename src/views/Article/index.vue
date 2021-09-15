@@ -44,7 +44,7 @@
         <div class="article-content" ref="content" markdown-body v-html="article.content"></div>
         <van-divider>正文结束</van-divider>
         <!-- 评论列表 -->
-        <CommentList :source='article.art_id' />
+        <CommentList @click-reply='onClickReply' :list='list' @updataTotal='totalCont = $event' :source='article.art_id' />
       </div>
       <!-- /加载完成-文章详情 -->
 
@@ -71,20 +71,26 @@
         type="default"
         round
         size="small"
+        @click="isShowPostComment = true"
       >写评论</van-button>
       <van-icon
         name="comment-o"
-        badge="123"
+        :badge="totalCont"
         color="#777"
       />
       <ArticleCollected v-model="article.is_collected" :artId='article.art_id' />
-      <van-icon
-        color="#777"
-        name="good-job-o"
-      />
+      <ArticleLike v-model="article.attitude" :artId='article.art_id' />
       <van-icon name="share" color="#777777"></van-icon>
     </div>
     <!-- /底部区域 -->
+    <!-- 发布评论 -->
+    <van-popup v-model="isShowPostComment" position="bottom" :style="{ height: '18%' }">
+      <CommentPost @on-post-success='onPostSuccess' :target="ArticleId" />
+    </van-popup>
+    <!-- 回复评论 -->
+    <van-popup v-model="isShowPostReplyComment" position="bottom" :style="{ height: '100%' }">
+      <CommentReply v-if="isShowPostReplyComment" @close-reply='isShowPostReplyComment = false' :comment='comment' />
+    </van-popup>
   </div>
 </template>
 
@@ -95,19 +101,30 @@ import './github-markdown.css'
 import FollowUser from '@/components/followUser.vue'
 import ArticleCollected from '@/components/articleCollected.vue'
 import CommentList from '@/components/comment-list.vue'
+import ArticleLike from '@/components/articleLike.vue'
+import CommentPost from './components/commentPost.vue'
+import CommentReply from './components/comment-reply.vue'
 export default {
   data () {
     return {
       article: {},
       isLoading: true,
-      is404: false
+      is404: false,
+      totalCont: 0,
+      isShowPostComment: false,
+      isShowPostReplyComment: false,
+      list: [],
+      comment: {}
     }
   },
 
   components: {
     FollowUser,
     ArticleCollected,
-    CommentList
+    CommentList,
+    ArticleLike,
+    CommentPost,
+    CommentReply
   },
 
   props: {
@@ -127,6 +144,7 @@ export default {
       this.isLoading = true
       try {
         const res = await getArticleDetail(this.ArticleId)
+        console.log(res)
         this.article = res
         this.isLoading = false
         // 等待视图更新，文章详情加载完成
@@ -154,6 +172,18 @@ export default {
           })
         }
       })
+    },
+
+    // 添加评论
+    onPostSuccess (obj) {
+      this.isShowPostComment = false
+      this.list.unshift(obj)
+    },
+
+    // 回复评论
+    onClickReply (comment) {
+      this.isShowPostReplyComment = true
+      this.comment = comment
     }
 
   }
