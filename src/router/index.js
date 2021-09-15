@@ -8,6 +8,7 @@ import Qa from '@/views/Qa'
 import Profile from '@/views/Profile'
 import Search from '@/views/Search'
 import Article from '@/views/Article'
+import Users from '@/views/Users'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,10 @@ const routes = [
     path: '/article/:ArticleId',
     component: Article,
     props: true // 开启props传参
+  },
+  {
+    path: '/users',
+    component: Users
   }
 ]
 
