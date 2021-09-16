@@ -87,3 +87,29 @@ export const getUserProfile = () => {
     method: 'GET'
   })
 }
+
+/**
+ * 更新用户信息
+ * @param {*} data {name?,photo?,birthday?,gender?}
+ * @returns promise
+ */
+export const updateUserProfile = (data) => {
+  return request({
+    url: '/v1_0/user/profile',
+    method: 'PATCH',
+    data
+  })
+}
+
+/**
+ * 编辑用户头像
+ * @param {*} data formData对象
+ * @returns promise
+ */
+export const updateUserAvatar = (data) => {
+  return request({
+    url: '/v1_0/user/photo',
+    method: 'PATCH',
+    data
+  })
+}

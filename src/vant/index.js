@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Button, CountDown, Field, Form, NavBar, Tabbar, TabbarItem, Toast, Image as VanImage, Grid, GridItem, Cell, CellGroup, Icon, Tab, Tabs, List, PullRefresh, Popup, Search, Empty, Sticky, Loading, Divider } from 'vant'
+import { Button, CountDown, Field, Form, NavBar, Tabbar, TabbarItem, Toast, Image as VanImage, Grid, GridItem, Cell, CellGroup, Icon, Tab, Tabs, List, PullRefresh, Popup, Search, Empty, Sticky, Loading, Divider, Picker, DatetimePicker } from 'vant'
 
 Vue.use(Button)
 Vue.use(NavBar)
@@ -24,5 +24,7 @@ Vue.use(Empty)
 Vue.use(Sticky)
 Vue.use(Loading)
 Vue.use(Divider)
+Vue.use(Picker)
+Vue.use(DatetimePicker)
 
 Vue.use(Toast)

@@ -11,3 +11,7 @@ dayjs.extend(relativeTime)
 export const formatDate = (data) => {
   return dayjs().to(data)
 }
+
+export const formats = (data) => {
+  return dayjs(data).format('YYYY-MM-DD')
+}
